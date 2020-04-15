@@ -20,7 +20,7 @@ public class GUI extends JFrame {
 	private JButton decryptButton;
 
 	public GUI() {
-		// Frame and content panel
+		// Frame and content pane
 		super("Vigenère Cipher");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 350);

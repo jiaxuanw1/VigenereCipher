@@ -34,8 +34,8 @@ public class Vigenere {
 	 * @return text encrypted with the keyword
 	 */
 	public static String encrypt(String text, String key) {
-		text = text.toUpperCase().replace(" ", "");
-		key = key.toUpperCase().replace(" ", "");
+		text = text.toUpperCase().replaceAll("\\p{Punct}|\\s", "");
+		key = key.toUpperCase().replaceAll("\\p{Punct}|\\s", "");
 		String keystream = generateKey(key, text.length());
 
 		StringBuilder ciphertext = new StringBuilder();
@@ -56,8 +56,8 @@ public class Vigenere {
 	 * @return text decrypted with the keyword
 	 */
 	public static String decrypt(String text, String key) {
-		text = text.toUpperCase().replace(" ", "");
-		key = key.toUpperCase().replace(" ", "");
+		text = text.toUpperCase().replaceAll("\\p{Punct}|\\s", "");
+		key = key.toUpperCase().replaceAll("\\p{Punct}|\\s", "");
 		String keystream = generateKey(key, text.length());
 
 		StringBuilder plaintext = new StringBuilder();
