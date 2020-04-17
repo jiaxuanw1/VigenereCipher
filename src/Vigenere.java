@@ -34,15 +34,21 @@ public class Vigenere {
 	 * @return text encrypted with the keyword
 	 */
 	public static String encrypt(String text, String key) {
-		text = text.toUpperCase().replaceAll("\\p{Punct}|\\s", "");
+		text = text.toUpperCase();
 		key = key.toUpperCase().replaceAll("\\p{Punct}|\\s", "");
-		String keystream = generateKey(key, text.length());
+		String keystream = generateKey(key, text.replaceAll("\\p{Punct}|\\s", "").length());
 
 		StringBuilder ciphertext = new StringBuilder();
-		for (int i = 0; i < text.length(); i++) {
-			int letterVal = (int) text.charAt(i) - 65;
-			int keyShift = (int) keystream.charAt(i) - 65;
-			ciphertext.append((char) ((letterVal + keyShift) % 26 + 65));
+		int keyIndex = 0;
+		for (char character : text.toCharArray()) {
+			if (isAlpha(character)) {
+				int letterVal = (int) character - 65;
+				int keyShift = (int) keystream.charAt(keyIndex) - 65;
+				ciphertext.append((char) ((letterVal + keyShift) % 26 + 65));
+				keyIndex++;
+			} else {
+				ciphertext.append(character);
+			}
 		}
 
 		return ciphertext.toString();
@@ -56,18 +62,60 @@ public class Vigenere {
 	 * @return text decrypted with the keyword
 	 */
 	public static String decrypt(String text, String key) {
-		text = text.toUpperCase().replaceAll("\\p{Punct}|\\s", "");
+		text = text.toUpperCase();
 		key = key.toUpperCase().replaceAll("\\p{Punct}|\\s", "");
-		String keystream = generateKey(key, text.length());
+		String keystream = generateKey(key, text.replaceAll("\\p{Punct}|\\s", "").length());
 
 		StringBuilder plaintext = new StringBuilder();
-		for (int i = 0; i < text.length(); i++) {
-			int letterVal = (int) text.charAt(i) - 65;
-			int keyShift = (int) keystream.charAt(i) - 65;
-			plaintext.append((char) ((letterVal - keyShift + 26) % 26 + 65));
+		int keyIndex = 0;
+		for (char character : text.toCharArray()) {
+			if (isAlpha(character)) {
+				int letterVal = (int) character - 65;
+				int keyShift = (int) keystream.charAt(keyIndex) - 65;
+				plaintext.append((char) ((letterVal - keyShift + 26) % 26 + 65));
+				keyIndex++;
+			} else {
+				plaintext.append(character);
+			}
 		}
 
 		return plaintext.toString();
+	}
+
+	/**
+	 * Determines whether the specified character is a letter in the English
+	 * alphabet.
+	 * 
+	 * @param c the character to test
+	 * @return {@code true} if the specified character is an English letter;
+	 *         {@code false} otherwise
+	 */
+	private static boolean isAlpha(char c) {
+		return isUpperCase(c) || isLowerCase(c);
+	}
+
+	/**
+	 * Determines whether the specified letter is uppercase.
+	 * 
+	 * @param letter the letter to test
+	 * @return {@code true} if the specified letter is uppercase; {@code false}
+	 *         otherwise
+	 */
+	private static boolean isUpperCase(char letter) {
+		int value = (int) letter;
+		return 65 <= value && value <= 90;
+	}
+
+	/**
+	 * Determines whether the specified letter is lowercase.
+	 * 
+	 * @param letter the letter to test
+	 * @return {@code true} if the specified letter is lowercase; {@code false}
+	 *         otherwise
+	 */
+	private static boolean isLowerCase(char letter) {
+		int value = (int) letter;
+		return 97 <= value && value <= 122;
 	}
 
 }

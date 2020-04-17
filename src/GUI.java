@@ -55,17 +55,13 @@ public class GUI extends JFrame {
 		contentPane.add(encryptButton);
 		encryptButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
+				String plaintext = textField.getText();
 				try {
-					String plaintext = textField.getText();
-					try {
-						String key = keyField.getText();
-						String encryptedMessage = Vigenere.encrypt(plaintext, key);
-						JOptionPane.showMessageDialog(null, "Encrypted Message:\r\n\r\n" + encryptedMessage);
-					} catch (Exception e) {
-						JOptionPane.showMessageDialog(null, "Please enter a valid key.");
-					}
+					String key = keyField.getText();
+					String encryptedMessage = Vigenere.encrypt(plaintext, key);
+					JOptionPane.showMessageDialog(null, "Encrypted Message:\r\n\r\n" + encryptedMessage);
 				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, "Please enter valid plain text.");
+					JOptionPane.showMessageDialog(null, "Please enter a valid key and plain text.");
 				}
 			}
 		});
@@ -76,17 +72,13 @@ public class GUI extends JFrame {
 		contentPane.add(decryptButton);
 		decryptButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
+				String ciphertext = textField.getText();
 				try {
-					String ciphertext = textField.getText();
-					try {
-						String key = keyField.getText();
-						String decryptedMessage = Vigenere.decrypt(ciphertext, key);
-						JOptionPane.showMessageDialog(null, "Decrypted Message:\r\n\r\n" + decryptedMessage);
-					} catch (Exception e) {
-						JOptionPane.showMessageDialog(null, "Please enter a valid key.");
-					}
+					String key = keyField.getText();
+					String decryptedMessage = Vigenere.decrypt(ciphertext, key);
+					JOptionPane.showMessageDialog(null, "Decrypted Message:\r\n\r\n" + decryptedMessage);
 				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, "Please enter valid cipher text.");
+					JOptionPane.showMessageDialog(null, "Please enter a valid key and cipher text.");
 				}
 			}
 		});
