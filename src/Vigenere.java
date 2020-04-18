@@ -27,15 +27,21 @@ public class Vigenere {
 	}
 
 	/**
-	 * Encrypts the given plaintext with the specified keyword.
+	 * Encrypts the given plain text with the specified keyword with the choice of
+	 * preserving the punctuation/capitalization.
 	 * 
-	 * @param text the plaintext to encrypt
-	 * @param key  the keyword
+	 * @param text          the plain text to encrypt
+	 * @param key           the keyword
+	 * @param preservePunct whether to preserve punctuation
 	 * @return text encrypted with the keyword
 	 */
-	public static String encrypt(String text, String key) {
+	public static String encrypt(String text, String key, boolean preservePunct) {
 		key = key.toUpperCase().replaceAll("\\p{Punct}|\\s", "");
 		String keystream = generateKey(key, text.replaceAll("\\p{Punct}|\\s", "").length());
+
+		if (!preservePunct) {
+			text = text.toUpperCase().replaceAll("\\p{Punct}|\\s", "");
+		}
 
 		StringBuilder ciphertext = new StringBuilder();
 		int keyIndex = 0;
@@ -59,15 +65,21 @@ public class Vigenere {
 	}
 
 	/**
-	 * Decrypts the given ciphertext with the specified keyword.
+	 * Decrypts the given cipher text with the specified keyword with the choice of
+	 * preserving the punctuation/capitalization.
 	 * 
-	 * @param text the ciphertext to decrypt
-	 * @param key  the keyword
+	 * @param text          the cipher text to decrypt
+	 * @param key           the keyword
+	 * @param preservePunct whether to preserve punctuation
 	 * @return text decrypted with the keyword
 	 */
-	public static String decrypt(String text, String key) {
+	public static String decrypt(String text, String key, boolean preservePunct) {
 		key = key.toUpperCase().replaceAll("\\p{Punct}|\\s", "");
 		String keystream = generateKey(key, text.replaceAll("\\p{Punct}|\\s", "").length());
+
+		if (!preservePunct) {
+			text = text.toUpperCase().replaceAll("\\p{Punct}|\\s", "");
+		}
 
 		StringBuilder plaintext = new StringBuilder();
 		int keyIndex = 0;

@@ -2,6 +2,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -16,6 +17,7 @@ public class GUI extends JFrame {
 	private JLabel keyLabel;
 	private JTextField textField;
 	private JTextField keyField;
+	private JCheckBox punctuationBox;
 	private JButton encryptButton;
 	private JButton decryptButton;
 
@@ -49,16 +51,20 @@ public class GUI extends JFrame {
 		keyField.setBounds(39, 94, 197, 20);
 		contentPane.add(keyField);
 
+		// Preserve punctuation checkbox
+		punctuationBox = new JCheckBox("Preserve punctuation", true);
+		punctuationBox.setBounds(10, 121, 227, 23);
+		contentPane.add(punctuationBox);
+
 		// Encrypt button
 		encryptButton = new JButton("Encrypt");
 		encryptButton.setBounds(10, 154, 89, 23);
 		contentPane.add(encryptButton);
 		encryptButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				String plaintext = textField.getText();
 				try {
-					String key = keyField.getText();
-					String encryptedMessage = Vigenere.encrypt(plaintext, key);
+					String encryptedMessage = Vigenere.encrypt(textField.getText(), keyField.getText(),
+							punctuationBox.isSelected());
 					JOptionPane.showMessageDialog(null, "Encrypted Message:\r\n\r\n" + encryptedMessage);
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, "Please enter a valid key and plain text.");
@@ -72,10 +78,9 @@ public class GUI extends JFrame {
 		contentPane.add(decryptButton);
 		decryptButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				String ciphertext = textField.getText();
 				try {
-					String key = keyField.getText();
-					String decryptedMessage = Vigenere.decrypt(ciphertext, key);
+					String decryptedMessage = Vigenere.decrypt(textField.getText(), keyField.getText(),
+							punctuationBox.isSelected());
 					JOptionPane.showMessageDialog(null, "Decrypted Message:\r\n\r\n" + decryptedMessage);
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, "Please enter a valid key and cipher text.");
