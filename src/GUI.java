@@ -27,30 +27,26 @@ public class GUI extends JFrame {
 	private JButton decryptButton;
 
 	public GUI(boolean dark) {
-		// Frame and content pane
 		super("Vigenère Cipher");
-		
-		// sets dark mode
-				if (dark) {
-					BasicLookAndFeel darcula = new DarculaLaf();
-					try {
-						UIManager.setLookAndFeel(darcula);
-					} catch (UnsupportedLookAndFeelException e1) {
-						// FIXME Auto-generated catch block
-						e1.printStackTrace();
-					}
-				} else {
-					// sets system theme
-					try {
-						UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-					} catch (Exception e3) {
-						// FIXME Auto-generated catch block
-						e3.printStackTrace();
-					}
 
-				}
-		
-		
+		if (dark) {
+			// sets dark mode
+			BasicLookAndFeel darcula = new DarculaLaf();
+			try {
+				UIManager.setLookAndFeel(darcula);
+			} catch (UnsupportedLookAndFeelException e1) {
+				e1.printStackTrace();
+			}
+		} else {
+			// sets system theme
+			try {
+				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+			} catch (Exception e3) {
+				e3.printStackTrace();
+			}
+		}
+
+		// Frame and content pane
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 350);
 		contentPane = new JPanel();
@@ -79,7 +75,8 @@ public class GUI extends JFrame {
 		contentPane.add(keyField);
 
 		// Preserve punctuation checkbox
-		punctuationBox = new JCheckBox("Preserve punctuation", true);
+		punctuationBox = new JCheckBox("Preserve punctuation");
+		punctuationBox.setSelected(true);
 		punctuationBox.setBounds(10, 121, 227, 23);
 		contentPane.add(punctuationBox);
 
