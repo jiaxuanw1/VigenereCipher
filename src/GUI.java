@@ -8,7 +8,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.basic.BasicLookAndFeel;
+
+import com.bulenkov.darcula.DarculaLaf;
 
 public class GUI extends JFrame {
 
@@ -21,9 +26,31 @@ public class GUI extends JFrame {
 	private JButton encryptButton;
 	private JButton decryptButton;
 
-	public GUI() {
+	public GUI(boolean dark) {
 		// Frame and content pane
 		super("Vigenère Cipher");
+		
+		// sets dark mode
+				if (dark) {
+					BasicLookAndFeel darcula = new DarculaLaf();
+					try {
+						UIManager.setLookAndFeel(darcula);
+					} catch (UnsupportedLookAndFeelException e1) {
+						// FIXME Auto-generated catch block
+						e1.printStackTrace();
+					}
+				} else {
+					// sets system theme
+					try {
+						UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+					} catch (Exception e3) {
+						// FIXME Auto-generated catch block
+						e3.printStackTrace();
+					}
+
+				}
+		
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 350);
 		contentPane = new JPanel();
