@@ -4,8 +4,9 @@ A Java program that implements the Vigenère Cipher, a polyalphabetic cipher usi
 
 ## Usage
 
-To start, run the main method in the Main class. This will open up a window where you can type in your cipher/plain text and the key.
-Then, you can encrypt or decrypt messages using the Vigenère Cipher by clicking the Encrypt/Decrypt buttons.
+Before running the program, you can choose to enable a dark theme by going to the Main.java file in the source folder. In it there is a boolean variable named darkEnabled, which is set to false by default. Changing it to true will give the program a dark theme when it is run (thanks to @22raor for implementing this!)
+
+To start, run the main method in the Main class. This will open up a window where you can type in your cipher/plain text and the key. There is also a checkbox that you can uncheck if you don't want the punctuation and capitalization in your message preserved. Then, you can encrypt or decrypt messages using the Vigenère Cipher by clicking the Encrypt/Decrypt buttons.
 
 ## How It Works
 
@@ -45,16 +46,12 @@ Although the table may look daunting, it's really just a series of Caesar cipher
 Here is how the Vigenère Cipher is used to encrypt a message in plain text:
 
 **Step 1:** 
-Using the key word/phrase, generate a key with the same length as the plain text. Start by removing all spaces and punctuation.
-If the key is longer than the plain text, start from the beginning of the keyword and use as many letters as needed for the key. If 
-the plain text is longer than the key (as is usually the case), once the end of the keyword is reached, just repeat the keyword as many
-times as necessary.
+Using the key word/phrase, generate a key with the same length as the plain text. Start by removing all spaces and punctuation. If the key is longer than the plain text, start from the beginning of the keyword and use as many letters as needed for the key. If the plain text is longer than the key (as is usually the case), once the end of the keyword is reached, just repeat the keyword as many times as necessary.
 
 **Step 2:**
 Now, since the plain text and the key have the same length, we can assign each letter in the plain text to a letter in the key.
 
 **Step 3:**
-Each letter in the key denotes a shift, where A=0, B=1, C=2, and so on, up to Z=25. So now, since each letter in the plain text
-message has been assigned a shift, simply apply the corresponding shift to each letter to obtain your encrypted message.
+Each letter in the key denotes a shift, where A=0, B=1, C=2, and so on, up to Z=25. So now, since each letter in the plain text message has been assigned a shift, simply apply the corresponding shift to each letter to obtain your encrypted message.
 
-This can be reversed to decrypt messages; instead of adding the shifts, subtract them.
+To decrypt messages, the shifting is done in reverse; instead of adding the shift values, subtract them.
