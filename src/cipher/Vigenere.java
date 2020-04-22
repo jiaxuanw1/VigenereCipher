@@ -1,3 +1,4 @@
+package cipher;
 
 /**
  * This class provides the necessary methods to encrypt and decrypt messages
@@ -8,7 +9,7 @@
 public class Vigenere {
 
 	/**
-	 * Generates the key with a specified length using a key word/phrase
+	 * Generates the key with a specified length using a key word/phrase.
 	 * 
 	 * @param key    the key word/phrase
 	 * @param length the desired length for the key
